@@ -25,6 +25,8 @@ from search_strategies.simple_sequence_generator import SimpleGenerator
 from search_strategies.greedy_generator import GreedyGenerator
 from search_strategies.sample_generator import SampleGenerator
 from utils import save_config
+from  rdkit.Chem import AllChem
+from rdkit import Chem
 logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
