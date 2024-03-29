@@ -263,11 +263,24 @@ def main(args):
 
 
 def cli_main():
+    sys.argv = ['NAG2G/validate.py', 'USPTO50K_brief_20230227', '--user-dir', './NAG2G', '--valid-subset', 'test',
+                '--task', 'G2G_unimolv2', '--loss', 'G2G', '--arch', 'NAG2G_G2G', '--encoder-type', 'unimolv2',
+                '--seed', '1', '--infer_step', '--results-path',
+                'NAG2G_unimolplus_uspto_50k_20230513-222355/checkpoint_last', '--path',
+                'NAG2G_unimolplus_uspto_50k_20230513-222355/checkpoint_last.pt', '--num-workers', '5',
+                '--ddp-backend=no_c10d', '--required-batch-size-multiple', '1', '--search_strategies',
+                'SimpleGenerator', '--beam-size', '10', '--len-penalty', '0.0', '--temperature', '1',
+                '--beam-size-second', '5', '--beam-head-second', '2', '--infer_save_name',
+                'smi_SimpleGenerator_lp0.0_t1_10_bhs2_bss5_b1_USPTO50K_brief_20230227.txt', '--batch-size', '1',
+                '--data-buffer-size', '1', '--fixed-validation-seed', '11', '--batch-size-valid', '1', '--config_file',
+                'NAG2G_unimolplus_uspto_50k_20230513-222355/config.ini']
+
     parser = options.get_validation_parser()
     add_search_strategies_args(parser)
     options.add_model_args(parser)
     args = options.parse_args_and_arch(parser)
     args = save_config.read_config(args)
+
     distributed_utils.call_main(args, main)
 
 
